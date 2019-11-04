@@ -55,6 +55,9 @@ namespace MultiplayerARPG
 
         void AddCharacter(GameObject gameObject)
         {
+            if (!BaseGameNetworkManager.Singleton.IsServer)
+                return;
+
             tempPlayerCharacterEntity = gameObject.GetComponent<BasePlayerCharacterEntity>();
             if (tempPlayerCharacterEntity != null && 
                 !characterObjectIds.Contains(tempPlayerCharacterEntity.ObjectId))
@@ -77,6 +80,9 @@ namespace MultiplayerARPG
 
         void RemoveCharacter(GameObject gameObject)
         {
+            if (!BaseGameNetworkManager.Singleton.IsServer)
+                return;
+
             tempPlayerCharacterEntity = gameObject.GetComponent<BasePlayerCharacterEntity>();
             if (tempPlayerCharacterEntity != null && 
                 characterObjectIds.Remove(tempPlayerCharacterEntity.ObjectId))
@@ -88,6 +94,9 @@ namespace MultiplayerARPG
 
         private void Update()
         {
+            if (!BaseGameNetworkManager.Singleton.IsServer)
+                return;
+
             if (characterObjectIds.Count == 0 &&
                 monsterEntities.Count > 0 &&
                 Time.unscaledTime - lastRemoveCharacterTime >= destroyMonsterDelay)
@@ -102,6 +111,9 @@ namespace MultiplayerARPG
 
         public override void Spawn(float delay)
         {
+            if (!BaseGameNetworkManager.Singleton.IsServer)
+                return;
+
             if (characterObjectIds.Count <= 0)
             {
                 // Spawn monster when there are player characters inside this collider
