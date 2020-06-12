@@ -129,7 +129,7 @@ namespace MultiplayerARPG
             {
                 Vector3 spawnPosition = GetRandomPosition();
                 Quaternion spawnRotation = GetRandomRotation();
-                GameObject spawnObj = Instantiate(monsterCharacterEntity.gameObject, spawnPosition, spawnRotation);
+                GameObject spawnObj = Instantiate(asset.gameObject, spawnPosition, spawnRotation);
                 BaseMonsterCharacterEntity entity = spawnObj.GetComponent<BaseMonsterCharacterEntity>();
                 entity.Level = level;
                 BaseGameNetworkManager.Singleton.Assets.NetworkSpawn(spawnObj);
