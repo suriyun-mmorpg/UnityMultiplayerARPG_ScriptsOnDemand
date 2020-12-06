@@ -38,7 +38,7 @@ namespace MultiplayerARPG
             if (!this.IsDead())
                 return;
 
-            character.Gold += rewardGold;
+            character.Gold = character.Gold.Increase(rewardGold);
             CurrentGameManager.SendNotifyRewardGold(character.ConnectionId, rewardGold);
         }
     }
