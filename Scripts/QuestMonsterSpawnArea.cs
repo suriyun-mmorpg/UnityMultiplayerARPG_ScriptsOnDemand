@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,8 +93,10 @@ namespace MultiplayerARPG
             }
         }
 
-        private void Update()
+        protected override void LateUpdate()
         {
+            base.LateUpdate();
+
             if (!BaseGameNetworkManager.Singleton.IsServer)
                 return;
 
@@ -109,33 +112,20 @@ namespace MultiplayerARPG
             }
         }
 
-        public override void Spawn(float delay)
+        protected override BaseMonsterCharacterEntity SpawnInternal(BaseMonsterCharacterEntity prefab, short level)
         {
-            if (!BaseGameNetworkManager.Singleton.IsServer)
-                return;
-
             if (characterObjectIds.Count <= 0)
             {
                 // Spawn monster when there are player characters inside this collider
-                return;
+                return null;
             }
-            StartCoroutine(SpawnRoutine(delay));
-        }
-
-        IEnumerator SpawnRoutine(float delay)
-        {
-            yield return new WaitForSecondsRealtime(delay);
-            if (characterObjectIds.Count > 0)
+            BaseMonsterCharacterEntity spawnedMonster = base.SpawnInternal(prefab, level);
+            if (spawnedMonster != null)
             {
-                Vector3 spawnPosition = GetRandomPosition();
-                Quaternion spawnRotation = GetRandomRotation();
-                GameObject spawnObj = Instantiate(asset.gameObject, spawnPosition, spawnRotation);
-                BaseMonsterCharacterEntity entity = spawnObj.GetComponent<BaseMonsterCharacterEntity>();
-                entity.Level = level;
-                BaseGameNetworkManager.Singleton.Assets.NetworkSpawn(spawnObj);
-                entity.SetSpawnArea(this, spawnPosition);
-                monsterEntities.Add(entity);
+                monsterEntities.Add(prefab);
+                return spawnedMonster;
             }
+            return null;
         }
     }
 }
