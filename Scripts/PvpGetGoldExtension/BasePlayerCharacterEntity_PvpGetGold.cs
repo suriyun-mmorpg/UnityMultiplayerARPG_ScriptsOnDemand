@@ -39,7 +39,7 @@ namespace MultiplayerARPG
                 return;
 
             character.Gold = character.Gold.Increase(rewardGold);
-            GameInstance.ServerGameMessageHandlers.SendNotifyRewardGold(character.ConnectionId, rewardGold);
+            GameInstance.ServerGameMessageHandlers.NotifyRewardGold(character.ConnectionId, rewardGold);
         }
     }
 }
