@@ -30,7 +30,7 @@ namespace MultiplayerARPG
             if (!IsServer)
                 return;
 
-            if (attacker == null || !(attacker.Entity is BasePlayerCharacterEntity))
+            if (attacker == null || attacker.Entity == Entity || !(attacker.Entity is BasePlayerCharacterEntity))
                 return;
 
             int rewardGold = 100;
