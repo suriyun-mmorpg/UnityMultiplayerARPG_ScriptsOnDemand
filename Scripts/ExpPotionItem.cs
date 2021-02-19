@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace MultiplayerARPG
 {
+    [CreateAssetMenu(fileName = "Exp Potion Item", menuName = "Create GameData/Item/Exp Potion Item", order = -4886)]
     public class ExpPotionItem : BaseItem, IPotionItem
     {
         public override string TypeTitle
