@@ -1,6 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace MultiplayerARPG
@@ -122,7 +120,7 @@ namespace MultiplayerARPG
             BaseMonsterCharacterEntity spawnedMonster = base.SpawnInternal(prefab, level);
             if (spawnedMonster != null)
             {
-                monsterEntities.Add(prefab);
+                monsterEntities.Add(spawnedMonster);
                 return spawnedMonster;
             }
             return null;
