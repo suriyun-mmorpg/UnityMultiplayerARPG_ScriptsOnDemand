@@ -7,18 +7,18 @@ namespace MultiplayerARPG
     public partial class BasePlayerCharacterEntity
     {
         [DevExtMethods("Awake")]
-        public void Awake_PvpGetGold()
+        public void Awake_PvpGetExp()
         {
-            onReceivedDamage += ReceivedDamage_PvpGetGold;
+            onReceivedDamage += ReceivedDamage_PvpGetExp;
         }
 
         [DevExtMethods("OnDestroy")]
-        public void OnDestroy_PvpGetGold()
+        public void OnDestroy_PvpGetExp()
         {
-            onReceivedDamage -= ReceivedDamage_PvpGetGold;
+            onReceivedDamage -= ReceivedDamage_PvpGetExp;
         }
 
-        private void ReceivedDamage_PvpGetGold(
+        private void ReceivedDamage_PvpGetExp(
             Vector3 fromPosition,
             IGameEntity attacker,
             CombatAmountType combatAmountType,
@@ -33,13 +33,14 @@ namespace MultiplayerARPG
             if (attacker == null || attacker.Entity == Entity || !(attacker.Entity is BasePlayerCharacterEntity))
                 return;
 
-            int rewardGold = 100;
-            BasePlayerCharacterEntity character = (attacker.Entity as BasePlayerCharacterEntity);
             if (!this.IsDead())
                 return;
 
-            character.Gold = character.Gold.Increase(rewardGold);
-            GameInstance.ServerGameMessageHandlers.NotifyRewardGold(character.ConnectionId, rewardGold);
+            int rewardExp = 100;
+            (attacker.Entity as BasePlayerCharacterEntity).RewardExp(new Reward()
+            {
+                exp = rewardExp
+            }, 1f, RewardGivenType.None);
         }
     }
 }
