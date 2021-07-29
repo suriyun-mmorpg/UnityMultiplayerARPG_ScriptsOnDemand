@@ -16,8 +16,9 @@ namespace MultiplayerARPG
         private BasePlayerCharacterEntity tempPlayerCharacterEntity;
         private float lastRemoveCharacterTime;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             cacheCollider = GetComponent<Collider>();
             cacheCollider2D = GetComponent<Collider2D>();
 

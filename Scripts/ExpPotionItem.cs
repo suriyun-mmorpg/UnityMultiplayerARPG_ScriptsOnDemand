@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MultiplayerARPG
 {
@@ -19,14 +17,14 @@ namespace MultiplayerARPG
 
         [Header("Potion Configs")]
         [SerializeField]
-        private Buff buff;
+        private Buff buff = Buff.Empty;
         public Buff Buff
         {
             get { return buff; }
         }
 
         [SerializeField]
-        private int exp;
+        private int exp = 0;
         public int Exp
         {
             get { return exp; }
