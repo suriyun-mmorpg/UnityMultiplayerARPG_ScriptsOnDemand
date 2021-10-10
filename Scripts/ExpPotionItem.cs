@@ -56,5 +56,10 @@ namespace MultiplayerARPG
         {
 
         }
+
+        public bool IsChanneledAbility()
+        {
+            return false;
+        }
     }
 }
