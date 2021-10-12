@@ -15,11 +15,11 @@ public class DisableRootMotionWhileMoving : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        if (character.MovementState.HasFlag(MovementState.IsGrounded) &&
-            !character.MovementState.HasFlag(MovementState.Forward) &&
-            !character.MovementState.HasFlag(MovementState.Backward) &&
-            !character.MovementState.HasFlag(MovementState.Left) &&
-            !character.MovementState.HasFlag(MovementState.Right))
+        if (character.MovementState.Has(MovementState.IsGrounded) &&
+            !character.MovementState.Has(MovementState.Forward) &&
+            !character.MovementState.Has(MovementState.Backward) &&
+            !character.MovementState.Has(MovementState.Left) &&
+            !character.MovementState.Has(MovementState.Right))
             animator.ApplyBuiltinRootMotion();
     }
 }
