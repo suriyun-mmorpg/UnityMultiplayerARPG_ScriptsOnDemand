@@ -19,6 +19,7 @@ namespace MultiplayerARPG
         }
 
         private void ReceivedDamage_PvpGetExp(
+            HitBoxPosition position,
             Vector3 fromPosition,
             IGameEntity attacker,
             CombatAmountType combatAmountType,
