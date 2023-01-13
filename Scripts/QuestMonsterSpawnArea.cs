@@ -111,7 +111,7 @@ namespace MultiplayerARPG
             }
         }
 
-        protected override BaseMonsterCharacterEntity SpawnInternal(BaseMonsterCharacterEntity prefab, short level)
+        protected override BaseMonsterCharacterEntity SpawnInternal(BaseMonsterCharacterEntity prefab, int level)
         {
             if (characterObjectIds.Count <= 0)
             {
