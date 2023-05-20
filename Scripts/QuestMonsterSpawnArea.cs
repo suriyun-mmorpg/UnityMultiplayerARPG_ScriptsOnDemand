@@ -65,7 +65,7 @@ namespace MultiplayerARPG
                 int indexOfQuest = tempPlayerCharacterEntity.IndexOfQuest(quest.DataId);
                 if (indexOfQuest >= 0 &&
                     !tempPlayerCharacterEntity.Quests[indexOfQuest].isComplete &&
-                    !tempPlayerCharacterEntity.Quests[indexOfQuest].IsAllTasksDone(tempPlayerCharacterEntity))
+                    !tempPlayerCharacterEntity.Quests[indexOfQuest].IsAllTasksDone(tempPlayerCharacterEntity, out _))
                 {
                     // Add characters which has quest, and quest is not complete yet
                     characterObjectIds.Add(tempPlayerCharacterEntity.ObjectId);
