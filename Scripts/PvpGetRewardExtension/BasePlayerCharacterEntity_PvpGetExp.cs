@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MultiplayerARPG
 {
@@ -43,7 +41,7 @@ namespace MultiplayerARPG
             (attacker.Entity as BasePlayerCharacterEntity).RewardExp(new Reward()
             {
                 exp = rewardExp
-            }, 1f, RewardGivenType.None);
+            }, 1f, RewardGivenType.None, 1, 1);
         }
     }
 }
