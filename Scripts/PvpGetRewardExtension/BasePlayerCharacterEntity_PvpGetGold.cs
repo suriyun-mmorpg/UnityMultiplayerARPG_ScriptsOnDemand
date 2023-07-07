@@ -34,6 +34,9 @@ namespace MultiplayerARPG
             if (attacker == null || attacker.Entity == Entity || !(attacker.Entity is BasePlayerCharacterEntity))
                 return;
 
+            if (Dueling.DuelingStarted && Dueling.DuelingCharacter != null && Dueling.DuelingCharacter.ObjectId == attacker.Entity.ObjectId)
+                return;
+
             if (!this.IsDead())
                 return;
 
