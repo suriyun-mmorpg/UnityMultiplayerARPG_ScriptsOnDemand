@@ -41,10 +41,7 @@ namespace MultiplayerARPG
                 return;
 
             int rewardExp = 100;
-            (attacker.Entity as BasePlayerCharacterEntity).RewardExp(new Reward()
-            {
-                exp = rewardExp
-            }, 1f, RewardGivenType.None, 1, 1);
+            (attacker.Entity as BasePlayerCharacterEntity).RewardExp(rewardExp, 1f, RewardGivenType.None, 1, 1);
         }
     }
 }

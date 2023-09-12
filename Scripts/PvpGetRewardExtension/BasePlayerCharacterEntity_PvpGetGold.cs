@@ -41,10 +41,7 @@ namespace MultiplayerARPG
                 return;
 
             int rewardGold = 100;
-            (attacker.Entity as BasePlayerCharacterEntity).RewardCurrencies(new Reward()
-            {
-                gold = rewardGold
-            }, 1f, RewardGivenType.None, 1, 1);
+            (attacker.Entity as BasePlayerCharacterEntity).RewardGold(rewardGold, 1f, RewardGivenType.None, 1, 1);
         }
     }
 }
