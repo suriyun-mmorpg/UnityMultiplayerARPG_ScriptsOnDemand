@@ -31,6 +31,18 @@ namespace MultiplayerARPG
             {
                 cacheCollider2D.isTrigger = true;
             }
+
+            BaseGameNetworkManager.Singleton.onUnregisterCharacter += OnUnregisterCharacter;
+        }
+
+        private void OnDestroy()
+        {
+            BaseGameNetworkManager.Singleton.onUnregisterCharacter -= OnUnregisterCharacter;
+        }
+
+        private void OnUnregisterCharacter(long connectionId)
+        {
+            characterObjectIds.Remove(connectionId);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -60,7 +72,7 @@ namespace MultiplayerARPG
 
             tempPlayerCharacterEntity = gameObject.GetComponent<BasePlayerCharacterEntity>();
             if (tempPlayerCharacterEntity != null && 
-                !characterObjectIds.Contains(tempPlayerCharacterEntity.ObjectId))
+                !characterObjectIds.Contains(tempPlayerCharacterEntity.ConnectionId))
             {
                 int indexOfQuest = tempPlayerCharacterEntity.IndexOfQuest(quest.DataId);
                 if (indexOfQuest >= 0 &&
@@ -68,7 +80,7 @@ namespace MultiplayerARPG
                     !tempPlayerCharacterEntity.Quests[indexOfQuest].IsAllTasksDone(tempPlayerCharacterEntity, out _))
                 {
                     // Add characters which has quest, and quest is not complete yet
-                    characterObjectIds.Add(tempPlayerCharacterEntity.ObjectId);
+                    characterObjectIds.Add(tempPlayerCharacterEntity.ConnectionId);
                     if (monsterEntities.Count == 0)
                     {
                         // Will spawn all monsters when there is no monsters, and character is only 1 character in list
@@ -85,7 +97,7 @@ namespace MultiplayerARPG
 
             tempPlayerCharacterEntity = gameObject.GetComponent<BasePlayerCharacterEntity>();
             if (tempPlayerCharacterEntity != null && 
-                characterObjectIds.Remove(tempPlayerCharacterEntity.ObjectId))
+                characterObjectIds.Remove(tempPlayerCharacterEntity.ConnectionId))
             {
                 // Remove characters when they move out from this collider
                 lastRemoveCharacterTime = Time.unscaledTime;
