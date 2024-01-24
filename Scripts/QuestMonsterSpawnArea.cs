@@ -40,7 +40,7 @@ namespace MultiplayerARPG
             BaseGameNetworkManager.Singleton.onUnregisterCharacter -= OnUnregisterCharacter;
         }
 
-        private void OnUnregisterCharacter(long connectionId)
+        private void OnUnregisterCharacter(long connectionId, string characterId, string userId)
         {
             characterObjectIds.Remove(connectionId);
         }
