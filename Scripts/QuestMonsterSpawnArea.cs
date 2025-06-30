@@ -35,8 +35,9 @@ namespace MultiplayerARPG
             BaseGameNetworkManager.Singleton.onUnregisterCharacter += OnUnregisterCharacter;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             BaseGameNetworkManager.Singleton.onUnregisterCharacter -= OnUnregisterCharacter;
         }
 
