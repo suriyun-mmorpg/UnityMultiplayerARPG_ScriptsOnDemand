@@ -124,14 +124,22 @@ namespace MultiplayerARPG
             }
         }
 
-        protected override BaseMonsterCharacterEntity SpawnInternal(BaseMonsterCharacterEntity prefab, AddressablePrefab addressablePrefab, int level, float destroyRespawnDelay)
+        protected override BaseMonsterCharacterEntity SpawnInternal(BaseMonsterCharacterEntity prefab
+#if !DISABLE_ADDRESSABLES
+            , AddressablePrefab addressablePrefab
+#endif
+            , int level, float destroyRespawnDelay)
         {
             if (characterObjectIds.Count <= 0)
             {
                 // Spawn monster when there are player characters inside this collider
                 return null;
             }
-            BaseMonsterCharacterEntity spawnedMonster = base.SpawnInternal(prefab, addressablePrefab, level, destroyRespawnDelay);
+            BaseMonsterCharacterEntity spawnedMonster = base.SpawnInternal(prefab
+#if !DISABLE_ADDRESSABLES
+                , addressablePrefab
+#endif
+                , level, destroyRespawnDelay);
             if (spawnedMonster != null)
             {
                 monsterEntities.Add(spawnedMonster);
