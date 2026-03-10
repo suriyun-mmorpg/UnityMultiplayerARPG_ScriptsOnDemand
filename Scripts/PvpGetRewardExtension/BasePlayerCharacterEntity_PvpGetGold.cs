@@ -20,7 +20,7 @@ namespace MultiplayerARPG
         private void ReceivedDamage_PvpGetGold(
             HitBoxPosition position,
             Vector3 fromPosition,
-            IGameEntity attacker,
+            EntityInfo instigator,
             CombatAmountType combatAmountType,
             int damage,
             CharacterItem weapon,
@@ -32,17 +32,18 @@ namespace MultiplayerARPG
             if (!IsServer)
                 return;
 
-            if (attacker == null || attacker.Entity == Entity || !(attacker.Entity is BasePlayerCharacterEntity))
+            if (instigator == null || instigator.ObjectId == ObjectId || instigator.Type != EntityTypes.Player)
                 return;
 
-            if (DuelingComponent != null && DuelingComponent.DuelingStarted && DuelingComponent.DuelingCharacter != null && DuelingComponent.DuelingCharacter.ObjectId == attacker.Entity.ObjectId)
+            if (DuelingComponent != null && DuelingComponent.DuelingStarted && DuelingComponent.DuelingCharacter != null && DuelingComponent.DuelingCharacter.ObjectId == instigator.ObjectId)
                 return;
 
             if (!this.IsDead())
                 return;
 
             int rewardGold = 100;
-            (attacker.Entity as BasePlayerCharacterEntity).RewardGold(rewardGold, 1f, RewardGivenType.None, 1, 1);
+            if (instigator.TryGetEntity(out BasePlayerCharacterEntity instigatorEntity))
+                instigatorEntity.RewardGold(rewardGold, 1f, RewardGivenType.None, 1, 1);
         }
     }
 }
