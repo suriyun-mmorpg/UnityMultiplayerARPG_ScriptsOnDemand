@@ -46,13 +46,34 @@ namespace MultiplayerARPG
             }
         }
 
-        private void _characterEntity_onReceivedDamage(HitBoxPosition position, Vector3 fromPosition, EntityInfo instigator, CombatAmountType combatAmountType, int totalDamage, CharacterItem weapon, BaseSkill skill, int skillLevel, CharacterBuff buff, bool isDamageOverTime)
+        private void _characterEntity_onReceivedDamage(
+            DamageableEntity target,
+            HitBoxPosition position,
+            Vector3 fromPosition,
+            EntityInfo instigator,
+            CombatAmountType combatAmountType,
+            int totalDamage,
+            CharacterItem weapon,
+            BaseSkill skill,
+            int skillLevel,
+            CharacterBuff buff,
+            bool isDamageOverTime)
         {
             _lastCombatTime = Time.unscaledTime;
             _state = State.Combating;
         }
 
-        private void _characterEntity_onLaunchDamageEntity(bool isLeftHand, CharacterItem weapon, int simulateSeed, byte triggerIndex, byte spreadIndex, List<Dictionary<DamageElement, MinMaxFloat>> damageAmounts, BaseSkill skill, int skillLevel, AimPosition aimPosition)
+        private void _characterEntity_onLaunchDamageEntity(
+            BaseGameEntity target,
+            bool isLeftHand,
+            CharacterItem weapon,
+            int simulateSeed,
+            byte triggerIndex,
+            byte spreadIndex,
+            List<Dictionary<DamageElement, MinMaxFloat>> damageAmounts,
+            BaseSkill skill,
+            int skillLevel,
+            AimPosition aimPosition)
         {
             _lastCombatTime = Time.unscaledTime;
             _state = State.Combating;
