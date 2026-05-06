@@ -48,6 +48,8 @@ namespace MultiplayerARPG
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other is CharacterController)
+                return;
             AddCharacter(other.gameObject);
         }
 
